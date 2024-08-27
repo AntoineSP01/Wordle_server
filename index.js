@@ -27,7 +27,7 @@ app.use((req, res, next) => {
 
 app.use(
     cors({
-        origin: "https://wordleserver-antoinesp01-antoines-projects-bf7851c2.vercel.app/",
+        origin: "https://wordleserver-antoines-projects-bf7851c2.vercel.app/",
         methods: ["GET", "POST", "PUT"],
         allowedHeaders: ["Content-Type", "Authorization"],
     })
