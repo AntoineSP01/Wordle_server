@@ -27,7 +27,7 @@ app.use((req, res, next) => {
 
 app.use(
     cors({
-        origin: process.env.REACT_APP_BACKEND_URL,
+        origin: process.env.REACT_URL,
         methods: ["GET", "POST", "PUT"],
         allowedHeaders: ["Content-Type", "Authorization"],
     })
