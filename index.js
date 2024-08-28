@@ -19,9 +19,10 @@ const app = express();
 app.use((req, res, next) => {
     const isDevelopment = process.env.NODE_ENV !== "production";
     const csp = isDevelopment
-        ? "default-src 'self'; script-src 'self' 'unsafe-eval'; img-src *; style-src * 'unsafe-inline'"
-        : "default-src 'self'; script-src 'self'; img-src *; style-src * 'unsafe-inline'";
+        ? "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; img-src *; style-src * 'unsafe-inline'"
+        : "default-src 'self'; script-src 'self' 'unsafe-inline'; img-src *; style-src * 'unsafe-inline'";
     res.setHeader("Content-Security-Policy", csp);
+
 
     next();
 });
