@@ -25,6 +25,7 @@ app.use((req, res, next) => {
 });
 
 
+
 app.use(
     cors({
         origin: process.env.REACT_URL,
@@ -51,7 +52,7 @@ function authenticateToken(req, res, next) {
 }
 
 app.get("/", (req, res) => {
-    res.send("Server is running!");
+    res.send(process.env.REACT_URL);
 });
 
 // Route pour obtenir un mot aléatoire
