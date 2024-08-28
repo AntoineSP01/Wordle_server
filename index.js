@@ -50,6 +50,10 @@ function authenticateToken(req, res, next) {
     });
 }
 
+app.get("/", (req, res) => {
+    res.send("Server is running!");
+});
+
 // Route pour obtenir un mot aléatoire
 app.get("/api/word", async (req, res) => {
     try {
