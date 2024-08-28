@@ -14,8 +14,6 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY); // Assurez-vous que votre clé A
 
 const app = express();
 
-
-
 app.use((req, res, next) => {
     const isDevelopment = process.env.NODE_ENV !== "production";
     const csp = isDevelopment
@@ -23,22 +21,18 @@ app.use((req, res, next) => {
         : "default-src 'self'; script-src 'self' 'unsafe-inline'; img-src *; style-src * 'unsafe-inline'";
     res.setHeader("Content-Security-Policy", csp);
 
-
     next();
 });
 
-
-
 app.use(
     cors({
-        origin: process.env.REACT_URL,
-        methods: ["GET", "POST", "PUT"],
+        origin: "*", // Autorise toutes les origines
+        credentials: true, // Autorise l'envoi de cookies et autres credentials
+        methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"], // Autorise toutes les méthodes HTTP
         allowedHeaders: ["Content-Type", "Authorization"],
     })
 );
 app.use(express.json());
-
-
 
 // Middleware pour vérifier le token JWT
 function authenticateToken(req, res, next) {
