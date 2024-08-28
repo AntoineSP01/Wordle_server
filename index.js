@@ -14,13 +14,15 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY); // Assurez-vous que votre clé A
 
 const app = express();
 
-const isDevelopment = process.env.NODE_ENV !== "production";
+
 
 app.use((req, res, next) => {
+    const isDevelopment = process.env.NODE_ENV !== "production";
     const csp = isDevelopment
-        ? "default-src 'self'; script-src 'self' 'unsafe-eval'"
-        : "default-src 'self'; script-src 'self'";
+        ? "default-src 'self'; script-src 'self' 'unsafe-eval'; img-src *; style-src * 'unsafe-inline'"
+        : "default-src 'self'; script-src 'self'; img-src *; style-src * 'unsafe-inline'";
     res.setHeader("Content-Security-Policy", csp);
+
     next();
 });
 
