@@ -136,7 +136,7 @@ app.post("/api/register", async (req, res) => {
 
 
 // Route de connexion
-app.post("/api/login", async (req, res) => {
+app.get("/api/login", async (req, res) => {
     const { email, password } = req.body;
 
     try {
