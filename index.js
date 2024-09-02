@@ -10,7 +10,7 @@ dotenv.config();
 
 
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY); // Assurez-vous que votre clé API est dans vos variables d'environnement
+sgMail.setApiKey(process.env.SENDGRID_API_KEY); 
 
 const app = express();
 
@@ -26,15 +26,15 @@ app.use((req, res, next) => {
 
 app.use(
     cors({
-        origin: "*", // Autorise toutes les origines
-        credentials: true, // Autorise l'envoi de cookies et autres credentials
-        methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"], // Autorise toutes les méthodes HTTP
+        origin: "*", 
+        credentials: true, 
+        methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"], 
         allowedHeaders: ["Content-Type", "Authorization"],
     })
 );
 app.use(express.json());
 
-// Middleware pour vérifier le token JWT
+
 function authenticateToken(req, res, next) {
     const authHeader = req.headers["authorization"];
     const token = authHeader && authHeader.split(" ")[1];
@@ -52,7 +52,7 @@ app.get("/", (req, res) => {
     res.send(process.env.REACT_URL);
 });
 
-// Route pour obtenir un mot aléatoire
+
 app.get("/api/word", async (req, res) => {
     try {
         const result = await pool.query(
@@ -65,7 +65,7 @@ app.get("/api/word", async (req, res) => {
     }
 });
 
-// Route pour traiter une tentative de mot
+
 app.post("/api/guess", (req, res) => {
     const { guess, word } = req.body;
 
@@ -88,7 +88,7 @@ app.post("/api/guess", (req, res) => {
     res.json({ feedback });
 });
 
-// Route d'inscription
+
 app.post("/api/register", async (req, res) => {
     const { name, email, password } = req.body;
 
@@ -106,7 +106,7 @@ app.post("/api/register", async (req, res) => {
             expiresIn: "1h",
         });
 
-        // Envoi de l'email de confirmation
+        
         const msg = {
             to: email,
             from: "schmerberperraud@gmail.com",
@@ -129,7 +129,7 @@ app.post("/api/register", async (req, res) => {
 });
 
 
-// Route de connexion
+
 app.get("/api/login", async (req, res) => {
     const { email, password } = req.body;
 
@@ -154,7 +154,7 @@ app.get("/api/login", async (req, res) => {
     }
 });
 
-// Route pour récupérer le profil d'utilisateur
+
 app.get("/api/profile", authenticateToken, async (req, res) => {
     try {
         const result = await pool.query(
@@ -174,7 +174,7 @@ app.get("/api/profile", authenticateToken, async (req, res) => {
     }
 });
 
-// Route pour mettre à jour le profil d'utilisateur
+
 app.put("/api/profile", authenticateToken, async (req, res) => {
     const { name } = req.body;
     try {
