@@ -48,10 +48,6 @@ function authenticateToken(req, res, next) {
     });
 }
 
-app.get("/", (req, res) => {
-    res.send(process.env.REACT_URL);
-});
-
 
 app.get("/api/word", async (req, res) => {
     try {
